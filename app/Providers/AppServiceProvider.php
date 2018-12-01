@@ -2,15 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Configs;
+use App\Imovel;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
-use Illuminate\Http\Request;
-
-use Auth;
-use App\Configs;
-use App\Contact;
-use App\Imovel;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,20 +29,12 @@ class AppServiceProvider extends ServiceProvider
         $data->telefone_3_formated = str_replace('(', '', $data->telefone_3);
         $data->telefone_3_formated = str_replace(') ', '', $data->telefone_3_formated);
         $data->telefone_3_formated = str_replace('-', '', $data->telefone_3_formated);
-        
-        $realtorsAll = Contact::listRealtors();
-        foreach ($realtorsAll as $realtor) {
-            $realtor->telefone_format = str_replace('(', '', $realtor->telefone);
-            $realtor->telefone_format = str_replace(') ', '', $realtor->telefone_format);
-            $realtor->telefone_format = str_replace('-', '', $realtor->telefone_format);
-        }
 
         $types = Imovel::listTypes();
 
         View::share([
             'data' => $data,
-            'realtorsAll' => $realtorsAll,
-            'headerTypes' => $types
+            'headerTypes' => $types,
         ]);
     }
 
@@ -57,6 +45,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
     }
 }
