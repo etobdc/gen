@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Imovel;
+namespace App\Http\Controllers\Equipes;
 
-use App\Caracteristicas;
 use App\Http\Controllers\RestrictedController;
+use App\Nadador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CaracteristicasController extends RestrictedController
+class NadadoresController extends RestrictedController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $imovelId)
+    public function index(Request $request, $equipeId)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Caracteristicas",
+            "Nadadores",
             [
-                ["icon" => "", "title" => "Imóveis", "url" => route('imovel.index')],
-                ["icon" => "", "title" => "Caracteristicas", "url" => ""],
+                ["icon" => "", "title" => "Equipes", "url" => route('equipes.index')],
+                ["icon" => "", "title" => "Nadadores", "url" => ""],
             ]
         );
 
@@ -39,13 +39,13 @@ class CaracteristicasController extends RestrictedController
 
         if (!empty($request->busca)) {
             $busca = $request->busca;
-            $items = Caracteristicas::listItems($items_per_page, $imovelId, $busca);
+            $items = Nadador::listItems($items_per_page, $equipeId, $busca);
         } else {
             $busca = "";
-            $items = Caracteristicas::listItems($items_per_page, $imovelId);
+            $items = Nadador::listItems($items_per_page, $equipeId);
         }
 
-        return view('imovel.caracteristicas.index', compact('headers', 'titles', 'items', 'trails', 'busca', 'actions', 'imovelId'));
+        return view('equipes.nadadores.index', compact('headers', 'titles', 'items', 'trails', 'busca', 'actions', 'equipeId'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CaracteristicasController extends RestrictedController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $imovelId)
+    public function store(Request $request, $equipeId)
     {
         $data = $request->all();
 
@@ -73,10 +73,9 @@ class CaracteristicasController extends RestrictedController
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Caracteristicas::create([
-            'imovel_id' => $imovelId,
+        Nadador::create([
+            'equipe_id' => $equipeId,
             'name' => $data['name'],
-            'quantidade' => $data['quantidade'],
         ]);
 
         return redirect()->back()->with('message', 'Registro cadastrado com sucesso!');
@@ -99,25 +98,25 @@ class CaracteristicasController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($imovelId, $id)
+    public function edit($equipeId, $id)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Caracteristicas",
+            "Nadadores",
             [
-                ["icon" => "", "title" => "Imóveis", "url" => route('imovel.index')],
-                ["icon" => "", "title" => "Caracteristicas", "url" => route('imovel.caracteristicas.index', $imovelId)],
+                ["icon" => "", "title" => "Equipes", "url" => route('equipes.index')],
+                ["icon" => "", "title" => "Nadadores", "url" => route('equipes.nadadores.index', $equipeId)],
                 ["icon" => "", "title" => "Editar", "url" => ""],
             ]
         );
 
-        $item = Caracteristicas::find($id);
+        $item = Nadador::find($id);
 
         if (empty($item)) {
             return redirect()->back();
         }
 
-        return view('imovel.caracteristicas.edit', compact('headers', 'titles', 'item', 'trails', 'imovelId'));
+        return view('equipes.nadadores.edit', compact('headers', 'titles', 'item', 'trails', 'equipeId'));
     }
 
     /**
@@ -127,7 +126,7 @@ class CaracteristicasController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $imovelId, $id)
+    public function update(Request $request, $equipeId, $id)
     {
         $data = $request->all();
 
@@ -137,13 +136,12 @@ class CaracteristicasController extends RestrictedController
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Caracteristicas::find($id)->update([
-            'imovel_id' => $imovelId,
+        Nadador::find($id)->update([
+            'equipe_id' => $equipeId,
             'name' => $data['name'],
-            'quantidade' => $data['quantidade'],
         ]);
 
-        return redirect()->route('imovel.caracteristicas.index', $imovelId)->with('message', 'Registro atualizado com sucesso!');
+        return redirect()->route('equipes.nadadores.index', $equipeId)->with('message', 'Registro atualizado com sucesso!');
     }
 
     /**
@@ -155,8 +153,8 @@ class CaracteristicasController extends RestrictedController
     public function destroy(Request $req)
     {
         $data = $req->all();
-        Caracteristicas::whereIn('id', $data['registro'])->delete();
-        return redirect()->back()->with('message', 'Itens excluídos com sucesso!');
+        Nadador::whereIn('id', $data['registro'])->delete();
+        return redirect()->back()->with('message', 'Nadadores excluídos com sucesso!');
     }
 
     private function validation(array $data, $action)

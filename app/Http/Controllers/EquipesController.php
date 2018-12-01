@@ -1,30 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Imovel;
+namespace App\Http\Controllers;
 
-use App\Caracteristicas;
+use App\Equipes;
 use App\Http\Controllers\RestrictedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CaracteristicasController extends RestrictedController
+class EquipesController extends RestrictedController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $imovelId)
+    public function index(Request $request)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Caracteristicas",
-            [
-                ["icon" => "", "title" => "Imóveis", "url" => route('imovel.index')],
-                ["icon" => "", "title" => "Caracteristicas", "url" => ""],
-            ]
+            "Equipes",
+            [["icon" => "", "title" => "Equipes", "url" => ""]]
         );
-
         #LISTA DE ITENS
         $items_per_page = config('constants.options.items_per_page');
         $titles = json_encode(["#", "Nome"]);
@@ -32,20 +28,32 @@ class CaracteristicasController extends RestrictedController
             [
                 'path' => '{item}/edit',
                 'icon' => 'fa fa-pencil',
-                'label' => 'Editar Item',
+                'label' => 'Editar Blog',
                 'color' => 'primary',
             ],
+            [
+                'path' => '{item}/nadadores',
+                'icon' => 'fa fa-users',
+                'label' => 'Nadadores',
+                'color' => 'success',
+            ],
         ]);
-
         if (!empty($request->busca)) {
             $busca = $request->busca;
-            $items = Caracteristicas::listItems($items_per_page, $imovelId, $busca);
+            $items = Equipes::listItems($items_per_page, $busca);
         } else {
             $busca = "";
-            $items = Caracteristicas::listItems($items_per_page, $imovelId);
+            $items = Equipes::listItems($items_per_page);
         }
 
-        return view('imovel.caracteristicas.index', compact('headers', 'titles', 'items', 'trails', 'busca', 'actions', 'imovelId'));
+        return view('equipes.index', compact('headers', 'titles', 'items', 'busca', 'actions'));
+    }
+
+    private function validation(array $data, $action = 'store')
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+        ]);
     }
 
     /**
@@ -64,7 +72,7 @@ class CaracteristicasController extends RestrictedController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $imovelId)
+    public function store(Request $request)
     {
         $data = $request->all();
 
@@ -73,13 +81,11 @@ class CaracteristicasController extends RestrictedController
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Caracteristicas::create([
-            'imovel_id' => $imovelId,
+        $page = Equipes::create([
             'name' => $data['name'],
-            'quantidade' => $data['quantidade'],
         ]);
 
-        return redirect()->back()->with('message', 'Registro cadastrado com sucesso!');
+        return redirect()->back()->with('message', 'Registro gravado com sucesso!');
     }
 
     /**
@@ -99,25 +105,24 @@ class CaracteristicasController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($imovelId, $id)
+    public function edit($id)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Caracteristicas",
+            "Equipes",
             [
-                ["icon" => "", "title" => "Imóveis", "url" => route('imovel.index')],
-                ["icon" => "", "title" => "Caracteristicas", "url" => route('imovel.caracteristicas.index', $imovelId)],
+                ["icon" => "", "title" => "Equipes", "url" => route('equipes.index')],
                 ["icon" => "", "title" => "Editar", "url" => ""],
             ]
         );
 
-        $item = Caracteristicas::find($id);
+        $item = Equipes::find($id);
 
         if (empty($item)) {
             return redirect()->back();
         }
 
-        return view('imovel.caracteristicas.edit', compact('headers', 'titles', 'item', 'trails', 'imovelId'));
+        return view('equipes.edit', compact('headers', 'titles', 'item'));
     }
 
     /**
@@ -127,23 +132,20 @@ class CaracteristicasController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $imovelId, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
 
         $validation = $this->validation($data, 'update');
-
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Caracteristicas::find($id)->update([
-            'imovel_id' => $imovelId,
+        $page = Equipes::find($id)->update([
             'name' => $data['name'],
-            'quantidade' => $data['quantidade'],
         ]);
 
-        return redirect()->route('imovel.caracteristicas.index', $imovelId)->with('message', 'Registro atualizado com sucesso!');
+        return redirect()->route('equipes.index')->with('message', 'Registro atualizado com sucesso!');
     }
 
     /**
@@ -152,17 +154,11 @@ class CaracteristicasController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $req)
+    public function destroy(Request $request, $id)
     {
-        $data = $req->all();
-        Caracteristicas::whereIn('id', $data['registro'])->delete();
-        return redirect()->back()->with('message', 'Itens excluídos com sucesso!');
-    }
+        $data = $request->all();
 
-    private function validation(array $data, $action)
-    {
-        return Validator::make($data, [
-            'name' => 'required',
-        ]);
+        Equipes::whereIn('id', $data['registro'])->delete();
+        return redirect()->back()->with('message', 'Itens excluídos com sucesso!');
     }
 }

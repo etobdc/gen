@@ -47,7 +47,7 @@
 					form-class="form-horizontal"
 					title="Adicionar Registro"
 					token="{{ csrf_token() }}"
-					url="{{ route('cidades.bairros.store', $cidadeId) }}"
+					url="{{ route('equipes.store') }}"
 					method="POST">
 
 						@if($errors->any())

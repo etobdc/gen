@@ -47,7 +47,7 @@
 					form-class="form-horizontal"
 					title="Adicionar Registro"
 					token="{{ csrf_token() }}"
-					url="{{ route('blogs.store') }}"
+					url="{{ route('equipes.nadadores.store', $equipeId) }}"
 					method="POST">
 
 						@if($errors->any())
@@ -62,32 +62,6 @@
 							</div>
 						</div>
 						@endif
-						<div class="form-group{{ $errors->has('thumbnail') ? ' has-error' : '' }}">
-							<label class="col-sm-2 control-label">Miniatura*</label>
-
-							<div class="col-sm-10">
-								<input type="file" name="thumbnail" required>
-
-								@if ($errors->has('thumbnail'))
-									<span class="help-block">
-										<strong>{{ $errors->first('thumbnail') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-						<div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-							<label class="col-sm-2 control-label">Imagem*</label>
-
-							<div class="col-sm-10">
-								<input type="file" name="image" required>
-
-								@if ($errors->has('image'))
-									<span class="help-block">
-										<strong>{{ $errors->first('image') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
 						<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 							<label for="name" class="col-sm-2 control-label">Nome*</label>
 
@@ -97,39 +71,6 @@
 								@if ($errors->has('name'))
 									<span class="help-block">
 										<strong>{{ $errors->first('name') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-						<div class="form-group{{ $errors->has('lead') ? ' has-error' : '' }}">
-							<label for="lead" class="col-sm-2 control-label">Lead*</label>
-							<div class="col-sm-10">
-								<textarea
-									class="col-sm-12"
-									style="resize:none;" rows="4"
-									name="lead"
-									required
-									>{{ old('lead') }}</textarea>
-
-								@if ($errors->has('lead'))
-									<span class="help-block">
-										<strong>{{ $errors->first('lead') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-						<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-							<label for="description" class="col-sm-2 control-label">Descrição*</label>
-							<div class="col-sm-10">
-								<ui-textarea
-								name="description"
-								value="{{ old('description') }}"
-								required="true"
-								></ui-textarea>
-
-								@if ($errors->has('description'))
-									<span class="help-block">
-										<strong>{{ $errors->first('description') }}</strong>
 									</span>
 								@endif
 							</div>

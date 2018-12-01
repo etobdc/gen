@@ -7,8 +7,8 @@
 				form-class="form-horizontal"
 				title="Atualizar Registro"
 				token="{{ csrf_token() }}"
-				url="{{ route('cidades.bairros.update', [$cidadeId, $item->id]) }}"
-				cancel-url="{{ route('cidades.bairros.index', $cidadeId) }}"
+				url="{{ route('equipes.update', $item->id) }}"
+				cancel-url="{{ route('equipes.index') }}"
 				method="PUT">
 
 				@if($errors->any())
