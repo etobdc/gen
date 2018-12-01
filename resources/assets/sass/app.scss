@@ -1,0 +1,25 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic");
+//Icon fonts
+@import "~font-awesome/scss/font-awesome.scss";
+@import "~ionicons/dist/scss/ionicons.scss";
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+a.no-color{
+	color: inherit;
+
+	&:hover{
+		color: inherit;
+	}
+}
+
+.alert-dismissible .close{
+	padding: 0.55rem 1.25rem!important;
+}
