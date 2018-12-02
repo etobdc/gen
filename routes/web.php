@@ -26,6 +26,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::resource('dashboard', 'DashboardController');
     Route::resource('configs', 'ConfigsController');
+
     Route::resource('equipes', 'EquipesController');
     Route::resource('equipes.nadadores', 'Equipes\NadadoresController');
 
@@ -33,12 +34,5 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('groups', 'GroupsController');
         Route::resource('api-integrations', 'ApiIntegrationsController');
         Route::resource('users', 'UsersController');
-    });
-
-    Route::prefix('imoveis')->group(function () {
-        Route::resource('tipos', 'TiposController');
-        Route::resource('imovel', 'ImovelController');
-        Route::resource('imovel.caracteristicas', 'Imovel\CaracteristicasController');
-        Route::resource('imovel.imagens', 'Imovel\ImagemExtraController');
     });
 });
