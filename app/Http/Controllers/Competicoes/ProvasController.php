@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Equipes;
+namespace App\Http\Controllers\Competicoes;
 
 use App\Http\Controllers\RestrictedController;
-use App\Nadador;
+use App\Prova;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class NadadoresController extends RestrictedController
+class ProvasController extends RestrictedController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $equipeId)
+    public function index(Request $request, $competicaoId)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Nadadores",
+            "Provas",
             [
-                ["icon" => "", "title" => "Equipes", "url" => route('equipes.index')],
-                ["icon" => "", "title" => "Nadadores", "url" => ""],
+                ["icon" => "", "title" => "Competições", "url" => route('competicoes.index')],
+                ["icon" => "", "title" => "Provas", "url" => ""],
             ]
         );
 
@@ -32,20 +32,20 @@ class NadadoresController extends RestrictedController
             [
                 'path' => '{item}/edit',
                 'icon' => 'fa fa-pencil',
-                'label' => 'Editar Nadador',
+                'label' => 'Editar Prova',
                 'color' => 'primary',
             ],
         ]);
 
         if (!empty($request->busca)) {
             $busca = $request->busca;
-            $items = Nadador::listItems($items_per_page, $equipeId, $busca);
+            $items = Prova::listItems($items_per_page, $competicaoId, $busca);
         } else {
             $busca = "";
-            $items = Nadador::listItems($items_per_page, $equipeId);
+            $items = Prova::listItems($items_per_page, $competicaoId);
         }
 
-        return view('equipes.nadadores.index', compact('headers', 'titles', 'items', 'trails', 'busca', 'actions', 'equipeId'));
+        return view('competicoes.provas.index', compact('headers', 'titles', 'items', 'trails', 'busca', 'actions', 'competicaoId'));
     }
 
     /**
@@ -64,7 +64,7 @@ class NadadoresController extends RestrictedController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $equipeId)
+    public function store(Request $request, $competicaoId)
     {
         $data = $request->all();
 
@@ -73,11 +73,12 @@ class NadadoresController extends RestrictedController
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Nadador::create([
-            'equipe_id' => $equipeId,
+        Prova::create([
+            'competicao_id' => $competicaoId,
             'name' => $data['name'],
-            'cpf' => $data['cpf'],
-            'ano_nasc' => $data['ano_nasc'],
+            'prova' => $data['prova'],
+            'masculino' => isset($data['masculino']) ? '1' : '0',
+            'feminino' => isset($data['feminino']) ? '1' : '0',
         ]);
 
         return redirect()->back()->with('message', 'Registro cadastrado com sucesso!');
@@ -100,25 +101,25 @@ class NadadoresController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($equipeId, $id)
+    public function edit($competicaoId, $id)
     {
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers(
-            "Nadadores",
+            "Provas",
             [
-                ["icon" => "", "title" => "Equipes", "url" => route('equipes.index')],
-                ["icon" => "", "title" => "Nadadores", "url" => route('equipes.nadadores.index', $equipeId)],
+                ["icon" => "", "title" => "Competições", "url" => route('competicoes.index')],
+                ["icon" => "", "title" => "Provas", "url" => route('competicoes.provas.index', $competicaoId)],
                 ["icon" => "", "title" => "Editar", "url" => ""],
             ]
         );
 
-        $item = Nadador::find($id);
+        $item = Prova::find($id);
 
         if (empty($item)) {
             return redirect()->back();
         }
 
-        return view('equipes.nadadores.edit', compact('headers', 'titles', 'item', 'trails', 'equipeId'));
+        return view('competicoes.provas.edit', compact('headers', 'titles', 'item', 'trails', 'competicaoId'));
     }
 
     /**
@@ -128,7 +129,7 @@ class NadadoresController extends RestrictedController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $equipeId, $id)
+    public function update(Request $request, $competicaoId, $id)
     {
         $data = $request->all();
 
@@ -138,14 +139,15 @@ class NadadoresController extends RestrictedController
             return redirect()->back()->withErrors($validation)->withInput();
         }
 
-        Nadador::find($id)->update([
-            'equipe_id' => $equipeId,
+        Prova::find($id)->update([
+            'competicao_id' => $competicaoId,
             'name' => $data['name'],
-            'cpf' => $data['cpf'],
-            'ano_nasc' => $data['ano_nasc'],
+            'prova' => $data['prova'],
+            'masculino' => isset($data['masculino']) ? '1' : '0',
+            'feminino' => isset($data['feminino']) ? '1' : '0',
         ]);
 
-        return redirect()->route('equipes.nadadores.index', $equipeId)->with('message', 'Registro atualizado com sucesso!');
+        return redirect()->route('competicoes.provas.index', $competicaoId)->with('message', 'Registro atualizado com sucesso!');
     }
 
     /**
@@ -157,7 +159,7 @@ class NadadoresController extends RestrictedController
     public function destroy(Request $req)
     {
         $data = $req->all();
-        Nadador::whereIn('id', $data['registro'])->delete();
+        Prova::whereIn('id', $data['registro'])->delete();
         return redirect()->back()->with('message', 'Nadadores excluídos com sucesso!');
     }
 

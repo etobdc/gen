@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('equipes', 'EquipesController');
     Route::resource('equipes.nadadores', 'Equipes\NadadoresController');
 
+    Route::resource('competicoes', 'CompeticoesController');
+    Route::resource('competicoes.provas', 'Competicoes\ProvasController');
+
     Route::prefix('admin')->group(function () {
         Route::resource('groups', 'GroupsController');
         Route::resource('api-integrations', 'ApiIntegrationsController');

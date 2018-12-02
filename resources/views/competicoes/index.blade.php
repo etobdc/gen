@@ -47,7 +47,7 @@
 					form-class="form-horizontal"
 					title="Adicionar Registro"
 					token="{{ csrf_token() }}"
-					url="{{ route('equipes.nadadores.store', $equipeId) }}"
+					url="{{ route('competicoes.store') }}"
 					method="POST">
 
 						@if($errors->any())
@@ -62,6 +62,7 @@
 							</div>
 						</div>
 						@endif
+
 						<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 							<label for="name" class="col-sm-2 control-label">Nome*</label>
 
@@ -75,27 +76,28 @@
 								@endif
 							</div>
 						</div>
-						<div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }} {{ $errors->has('ano_nasc') ? ' has-error' : '' }}">
-							<label for="cpf" class="col-sm-2 control-label">CPF*</label>
+						<div class="form-group{{ $errors->has('local') ? ' has-error' : '' }}">
+							<label for="local" class="col-sm-2 control-label">Local*</label>
 
-							<div class="col-sm-4">
-								<input type="number" name="cpf" class="form-control" id="cpf" value="{{ old('cpf') }}" maxlength="255" required>
+							<div class="col-sm-10">
+								<input type="text" name="local" class="form-control" id="local" value="{{ old('local') }}" maxlength="255" required>
 
-								@if ($errors->has('cpf'))
+								@if ($errors->has('local'))
 									<span class="help-block">
-										<strong>{{ $errors->first('cpf') }}</strong>
+										<strong>{{ $errors->first('local') }}</strong>
 									</span>
 								@endif
 							</div>
+						</div>
+						<div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+							<label for="date" class="col-sm-2 control-label">Data*</label>
 
-							<label for="ano_nasc" class="col-sm-2 control-label">Ano de Nascimento*</label>
+							<div class="col-sm-3">
+								<input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}" maxlength="255" required>
 
-							<div class="col-sm-4">
-								<input type="number" name="ano_nasc" class="form-control" id="ano_nasc" value="{{ old('ano_nasc') }}" maxlength="255" required>
-
-								@if ($errors->has('ano_nasc'))
+								@if ($errors->has('date'))
 									<span class="help-block">
-										<strong>{{ $errors->first('ano_nasc') }}</strong>
+										<strong>{{ $errors->first('date') }}</strong>
 									</span>
 								@endif
 							</div>

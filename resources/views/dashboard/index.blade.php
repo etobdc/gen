@@ -29,14 +29,14 @@
     @endIf
 		<div class="col-md-12">
 			<div class="col-md-4 col-xs-12">
-        <a href="{{ route('imovel.index') }}">
+        <a >
           <div class="small-box bg-orange">
             <div class="inner">
-              <h3>{{ $totalImoveis }}</h3>
-              <p>Imóveis</p>
+              <h3>{{ $totalCompticoes }}</h3>
+              <p>Competições</p>
             </div>
             <div class="icon">
-              <i class="fa fa-home"></i>
+              <i class="fa fa-trophy"></i>
             </div>
           </div>
         </a>

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Competicoes;
+use App\Http\Controllers\RestrictedController;
 use Illuminate\Http\Request;
-Use App\Http\Controllers\RestrictedController;
-
-use App\Imovel;
 
 class DashboardController extends RestrictedController
 {
@@ -20,9 +19,9 @@ class DashboardController extends RestrictedController
         #PAGE TITLE E BREADCRUMBS
         $headers = parent::headers("Dashboard");
 
-        $totalImoveis = Imovel::count();
+        $totalCompticoes = Competicoes::count();
 
-        return view('dashboard.index', compact('headers', 'totalImoveis'));
+        return view('dashboard.index', compact('headers', 'totalCompticoes'));
     }
 
     /**

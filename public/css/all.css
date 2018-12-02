@@ -20130,6 +20130,9 @@ table.text-center th {
   margin-bottom: 25px;
   font-weight: 300;
 }
+.login-logo img{
+  max-width: 300px;
+}
 .login-logo a,
 .register-logo a {
   color: #444;

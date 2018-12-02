@@ -47,7 +47,7 @@
 					form-class="form-horizontal"
 					title="Adicionar Registro"
 					token="{{ csrf_token() }}"
-					url="{{ route('equipes.nadadores.store', $equipeId) }}"
+					url="{{ route('competicoes.provas.store', $competicaoId) }}"
 					method="POST">
 
 						@if($errors->any())
@@ -75,27 +75,46 @@
 								@endif
 							</div>
 						</div>
-						<div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }} {{ $errors->has('ano_nasc') ? ' has-error' : '' }}">
-							<label for="cpf" class="col-sm-2 control-label">CPF*</label>
+						<div class="form-group{{ $errors->has('prova') ? ' has-error' : '' }}">
+							<label for="prova" class="col-sm-2 control-label">Prova*</label>
 
-							<div class="col-sm-4">
-								<input type="number" name="cpf" class="form-control" id="cpf" value="{{ old('cpf') }}" maxlength="255" required>
-
-								@if ($errors->has('cpf'))
+							<div class="col-sm-10">
+								<select type="text" name="prova" class="form-control" id="prova" value="{{ old('prova') }}" maxlength="255" required>
+									<option value="">Seleciona qual o tipo da prova</option>
+									<option value="1">50m Rasos</option>
+									<option value="2">50m Costas</option>
+									<option value="3">50m Livre</option>
+									<option value="4">50m peito</option>
+									<option value="5">100m Livre</option>
+									<option value="6">100m borboleta</option>
+								</select>
+								@if ($errors->has('prova'))
 									<span class="help-block">
-										<strong>{{ $errors->first('cpf') }}</strong>
+										<strong>{{ $errors->first('prova') }}</strong>
 									</span>
 								@endif
 							</div>
-
-							<label for="ano_nasc" class="col-sm-2 control-label">Ano de Nascimento*</label>
+						</div>
+						<div class="form-group{{ $errors->has('masculino') ? ' has-error' : '' }} {{ $errors->has('feminino') ? ' has-error' : '' }}">
+							<label for="masculino" class="col-sm-2 control-label">Masculino*</label>
 
 							<div class="col-sm-4">
-								<input type="number" name="ano_nasc" class="form-control" id="ano_nasc" value="{{ old('ano_nasc') }}" maxlength="255" required>
+								<input type="checkbox" name="masculino" class="" id="masculino" value="1" maxlength="255" >
 
-								@if ($errors->has('ano_nasc'))
+								@if ($errors->has('masculino'))
 									<span class="help-block">
-										<strong>{{ $errors->first('ano_nasc') }}</strong>
+										<strong>{{ $errors->first('masculino') }}</strong>
+									</span>
+								@endif
+							</div>
+							<label for="Feminino" class="col-sm-2 control-label">Feminino*</label>
+
+							<div class="col-sm-4">
+								<input type="checkbox" name="feminino" class="" id="feminino" value="1" maxlength="255" >
+
+								@if ($errors->has('feminino'))
+									<span class="help-block">
+										<strong>{{ $errors->first('feminino') }}</strong>
 									</span>
 								@endif
 							</div>

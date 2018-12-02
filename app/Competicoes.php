@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Nadador extends Model
+class Competicoes extends Model
 {
 
     /**
@@ -14,31 +14,27 @@ class Nadador extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'cpf', 'ano_nasc', 'equipe_id',
+        'name', 'date', 'local',
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
     ];
 
-    public static function listItems($paginate, $id = null, $search = null)
+    public static function listItems($paginate, $search = null)
     {
         if ($search) {
-            $items = DB::table('nadadors')
+            $items = DB::table('competicoes')
                 ->select('id', 'name')
-                ->whereRaw("equipe_id = $id")
                 ->where(function ($query) use ($search) {
                     $query->orWhere('id', 'like', '%' . $search . '%')
-                        ->orWhere('name', 'like', '%' . $search . '%')
-                        ->orWhere('cpf', 'like', '%' . $search . '%')
-                        ->orWhere('ano_nasc', 'like', '%' . $search . '%');
+                        ->orWhere('name', 'like', '%' . $search . '%');
                 })
                 ->orderBy('id', 'ASC')
                 ->paginate($paginate);
         } else {
-            $items = DB::table('nadadors')
+            $items = DB::table('competicoes')
                 ->select('id', 'name')
-                ->whereRaw("equipe_id = $id")
                 ->orderBy('id', 'ASC')
                 ->paginate($paginate);
         }

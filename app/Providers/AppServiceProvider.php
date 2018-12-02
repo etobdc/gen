@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Configs;
-use App\Imovel;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -30,11 +29,8 @@ class AppServiceProvider extends ServiceProvider
         $data->telefone_3_formated = str_replace(') ', '', $data->telefone_3_formated);
         $data->telefone_3_formated = str_replace('-', '', $data->telefone_3_formated);
 
-        $types = Imovel::listTypes();
-
         View::share([
             'data' => $data,
-            'headerTypes' => $types,
         ]);
     }
 

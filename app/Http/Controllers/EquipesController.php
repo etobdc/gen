@@ -28,7 +28,7 @@ class EquipesController extends RestrictedController
             [
                 'path' => '{item}/edit',
                 'icon' => 'fa fa-pencil',
-                'label' => 'Editar Blog',
+                'label' => 'Editar Equipe',
                 'color' => 'primary',
             ],
             [

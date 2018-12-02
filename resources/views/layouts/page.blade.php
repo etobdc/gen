@@ -96,7 +96,7 @@
 	</div>
 
 	<footer class="main-footer">
-		<strong>Copyright &copy; 2018 <a href="https://o2.ag">o2.ag</a>.</strong> Todos os direitos reservados.
+		<strong>Copyright &copy; {{ date('Y') }} NatSystem</strong> Todos os direitos reservados.
 	</footer>
 </div>
 
