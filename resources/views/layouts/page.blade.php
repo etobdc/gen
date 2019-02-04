@@ -7,7 +7,6 @@
 		<!-- Logo -->
 		<a href="{{ route('dashboard.index') }}" class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><img src=" {{ $data['logos']['logo50'] }}" style="max-height: 50px; max-width: 50px"></span>
 			<!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><img src="{{ $data['logos']['logo200'] }}" style="max-height: 50px; max-width: 200px"></span>
 		</a>

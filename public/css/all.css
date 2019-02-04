@@ -16120,6 +16120,90 @@ a.no-color:hover {
   padding: 0.55rem 1.25rem !important;
 }
 
+.login-logo img {
+  max-width: 300px;
+}
+
+.form-control:focus {
+  border: solid 1px #2378eb !important;
+  -webkit-box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+          box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+
+.skin-red .wrapper,
+.skin-red .main-sidebar,
+.skin-red .left-side {
+  background: #fff !important;
+}
+
+.skin-red .sidebar-menu > li.active > a {
+  border-left-color: #2378eb !important;
+  background: #2378eb !important;
+  color: #fff !important;
+}
+
+.skin-red .sidebar-menu > li:hover > a,
+.skin-red .sidebar-menu > li.active > a,
+.skin-red .sidebar-menu > li.menu-open > a {
+  background: #2378eb !important;
+  color: #fff !important;
+}
+
+.skin-red .sidebar-menu > li > .treeview-menu {
+  background: #4e92ef !important;
+  color: #fff !important;
+}
+
+.skin-red .sidebar-menu > li > .treeview-menu a {
+  color: #d2d1d1 !important;
+}
+
+.skin-red .sidebar-menu > li > .treeview-menu a:hover {
+  color: #fff !important;
+}
+
+.skin-red .sidebar-menu > li > .treeview-menu .active a {
+  color: #fff !important;
+}
+
+.skin-red .sidebar a {
+  color: #353232 !important;
+}
+
+.nav-tabs-custom > .tab-content {
+  -webkit-box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+          box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+
+.fixed .main-header,
+.fixed .main-sidebar,
+.fixed .left-side {
+  -webkit-box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+          box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+
+.main-header .logo .logo-lg {
+  background: #fff;
+}
+
+.skin-red .main-header .logo {
+  background: #fff !important;
+}
+
+.skin-red .main-header .navbar {
+  background: #2378eb !important;
+}
+
+.login-box-body {
+  -webkit-box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+          box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dropdown-menu {
+  -webkit-box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+          box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+
 
 /*
  * Skin: Red
@@ -20129,9 +20213,6 @@ table.text-center th {
   text-align: center;
   margin-bottom: 25px;
   font-weight: 300;
-}
-.login-logo img{
-  max-width: 300px;
 }
 .login-logo a,
 .register-logo a {

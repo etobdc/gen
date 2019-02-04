@@ -1,4 +1,3 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic");
@@ -12,14 +11,83 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-a.no-color{
-	color: inherit;
+a.no-color {
+  color: inherit;
 
-	&:hover{
-		color: inherit;
-	}
+  &:hover {
+    color: inherit;
+  }
 }
 
-.alert-dismissible .close{
-	padding: 0.55rem 1.25rem!important;
+.alert-dismissible .close {
+  padding: 0.55rem 1.25rem !important;
+}
+.login-logo {
+  img {
+    max-width: 300px;
+  }
+}
+.form-control {
+  &:focus {
+    border: solid 1px #2378eb !important;
+    box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+  }
+}
+
+.skin-red .wrapper,
+.skin-red .main-sidebar,
+.skin-red .left-side {
+  background: #fff !important;
+}
+.skin-red .sidebar-menu > li.active > a {
+  border-left-color: #2378eb !important;
+  background: #2378eb !important;
+  color: #fff !important;
+}
+.skin-red .sidebar-menu > li:hover > a,
+.skin-red .sidebar-menu > li.active > a,
+.skin-red .sidebar-menu > li.menu-open > a {
+  background: #2378eb !important;
+  color: #fff !important;
+}
+.skin-red .sidebar-menu > li > .treeview-menu {
+  background: #4e92ef !important;
+  color: #fff !important;
+  a {
+    color: #d2d1d1 !important;
+    &:hover {
+      color: #fff !important;
+    }
+  }
+  .active {
+    a {
+      color: #fff !important;
+    }
+  }
+}
+.skin-red .sidebar a {
+  color: #353232 !important;
+}
+.nav-tabs-custom > .tab-content {
+  box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+.fixed .main-header,
+.fixed .main-sidebar,
+.fixed .left-side {
+  box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+.main-header .logo .logo-lg {
+  background: #fff;
+}
+.skin-red .main-header .logo {
+  background: #fff !important;
+}
+.skin-red .main-header .navbar {
+  background: #2378eb !important;
+}
+.login-box-body {
+  box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
+}
+.dropdown-menu {
+  box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.45) !important;
 }
